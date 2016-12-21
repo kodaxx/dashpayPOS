@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DashPay</title>
+
+
+    <link rel='stylesheet prefetch' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/183786/waves.css'>
+
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/wizard.css">
+    <script>
+        var visited = localStorage.getItem('visited');
+        if (visited) {
+            window.location.href = "/home.html";
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <div style="display:flex;justify-content:center;align-items:center;">
+        <!-- FIRST TIME WIZARD -->
+        <!-- PAGE 1 -->
+        <div id="wizard1" class="">
+            <div id='mainBox'>
+                <img class='headerImage' src='img/dash_pay_ix.png'>
+                <br>
+                <div class="welcome basic" id="welcome">Welcome to DashPay!</div>
+                <br>
+                <p class="basic heading1 grey">Let's create a new account!</p>
+                <br>
+                <br>
+                <p class="basic heading2 grey">If you already have an xPub key select 'existing account' and use the settings menu to enter it."</p>
+                <br>
+                <br>
+                <button onclick='next()' class='mainButton'>new account</button>
+                <button onclick='existing()' class='mainButton'>existing account</button>
+            </div>
+        </div>
+        <!-- END PAGE 1 -->
+
+        <!-- PAGE 2 -->
+        <div id="wizard2" class="hidden">
+            <div id='mainBox'>
+                <img class='headerImage' src='img/dash_pay_ix.png'>
+                <p class="basic heading1 grey" id='storeName'>Business Name:</p>
+                <input class='basic biginput' id='store' type='text' value='' name='store' />
+                <br>
+                <p class="basic heading1 grey">Note: This name will appear on your customers' statements.</p>
+                <br>
+                <br>
+                <button onclick='generate()' class='mainButton'>generate</button>
+                <button onclick='next()' class='mainButton'>back</button>
+            </div>
+        </div>
+        <!-- END PAGE 2 -->
+
+        <!-- PAGE 3 -->
+        <div id="wizard3" class="hidden">
+            <div id='mainBox'>
+                <img class='headerImage' src='img/dash_pay_ix.png'>
+                <br>
+                <p class="basic heading1 grey" id='storeName'>Public Key:</p>
+                <input class='basic smallinput' id='xpubgen' type='text' value='' name='xpubgen' />
+                <p class="basic heading1 grey" id='storeName'>Private Key:</p>
+                <input class='basic smallinput' id='xprvgen' type='text' value='' name='xprvgen' />
+                <p class="basic heading2 red">Note: These account numbers cannot be recovered! Never give out your keys! Save them in a secure location.</p>
+                <br>
+                <button onclick='existing()' class='mainButton'>done</button>
+            </div>
+        </div>
+        <!-- END PAGE 3 -->
+
+    </div>
+
+    <!-- FRAMEWORKS -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/183786/waves.js'></script>
+
+    <!-- SCRIPTS -->
+    <script src="js/bitcoinjs-lib.js"></script>
+    <script src="js/jquery-qrcode-0.14.0.min.js"></script>
+
+    <script src="js/bitcoinjs-1-5-7.js"></script>
+    <script src="js/bitcoinjs-extensions.js"></script>
+    <script src="js/sjcl-bip39.js"></script>
+    <script src="js/wordlist_english.js"></script>
+    <script src="js/jsbip39.js"></script>
+    <script src="js/generate.js"></script>
+
+    <script src="js/wizard.js"></script>
+
+</body>
+
+</html>

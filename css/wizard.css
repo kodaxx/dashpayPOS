@@ -1,0 +1,39 @@
+.basic {
+    margin: 3.5%;
+    width: 92%;
+    text-align: center;
+    font-family: Verdana;
+}
+.welcome {
+    font-size: 2.2em;
+    color: #3498db;
+}
+.heading1 {
+    font-size: 1.5em;
+    color: #7e7e7e;
+}
+.heading2 {
+    font-size: 1em;
+    color: #7e7e7e;
+}
+.instructions {
+    font-size: 2em;
+}
+.biginput {
+    font-size: 4em;
+    background: #ededed;
+    border: 1px solid #d5d5d5;
+}
+.smallinput {
+    font-size: 3em;
+    background: #ededed;
+    border: 1px solid #d5d5d5;
+}
+
+.grey {
+    color: #7e7e7e;
+}
+
+.red {
+    color: #db1616;
+}
