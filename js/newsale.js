@@ -1,3 +1,6 @@
+/*jslint browser: true*/
+/*global $, console, key, BIP32, jQuery, alert*/
+
 //precision (8 decimal) rounding for dash
 function roundNumber(num, dec) {
     return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
@@ -5,15 +8,15 @@ function roundNumber(num, dec) {
 
 
 //function to generate HD addresses
-var chain = null
+var chain = null;
 
 function generateAddress(chain, index) {
 
     chain = key.derive_child(0);
 
     if (chain) {
-        var childkey = chain.derive_child(index);
-        var childaddr = childkey.eckey.getBitcoinAddress().toString();
+        var childkey = chain.derive_child(index),
+			childaddr = childkey.eckey.getBitcoinAddress().toString();
 
         console.log(index + ": " + childaddr);
         return childaddr;
@@ -65,9 +68,8 @@ function submitForm(e) {
             //create new key instance
             key = new BIP32(source_key);
 
-            var address = generateAddress("receive", index);
-
-            var amount = roundNumber((e.value / price), 8);
+            var address = generateAddress("receive", index),
+				amount = roundNumber((e.value / price), 8);
 
             console.log("Dash amount: " + amount);
 

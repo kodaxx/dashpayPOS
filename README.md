@@ -19,14 +19,13 @@ DashPay is a mobile-friendly point-of-sale app that merchants can use to accept 
 * NFC touch-to-pay with mobile phones using Dash Wallet
 * Offline payments system using plastic EMV-type cards for customers
 * Ability to have payments converted to fiat instantly
+* Compatible with Trezor
 
 # Installation
 
 Pending
 
-# License
-
-#TO-DO before first release:
+# TO-DO before first release
 
 * Major code clean-up/refactoring
 * Finish implementing current features
@@ -35,9 +34,11 @@ Pending
 * Cordova/PhoneGape builds
 * Electron Builds
 
-# TO-DO:
+# TO-DO
 
 * Change from dashjs to bitcore
+
+# License
 
 Copyright (C) 2016 kodaxx & nitya
 
