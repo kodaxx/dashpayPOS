@@ -2,7 +2,7 @@
 
 DashPay is a mobile-friendly point-of-sale app that merchants can use to accept Dash payments.
 
-![alt text](https://github.com//kodaxx/dashpayPOS/raw/master/img/dashpayterminal.png "DashPay Terminal Mockup")
+![alt text](https://github.com//kodaxx/dashpayPOS/raw/master/www/img/dashpayterminal.png "DashPay Terminal Mockup")
 
 # Current Features
 
