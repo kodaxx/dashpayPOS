@@ -1,0 +1,249 @@
+/* MAIN CSS */
+
+body {
+	background: #ededed;
+	font-family: Roboto;
+	margin: 0;
+	padding: 0;
+}
+.hidden {
+	left: -9999px;
+	position: absolute;
+}
+.mainBox {
+	background: #ededed;
+	width: 100%;
+	text-align: center;
+}
+.headerImage {
+	margin: 0px, 25px;
+	margin-bottom: 25px;
+}
+.price {
+	box-shadow: #3498db 0 0 1px 1px;
+	background: #3498db;
+	color: #fff;
+	font-size: 1.2em;
+	font-family: Verdana;
+	border: none;
+	/*background: linear-gradient(to bottom, #fafafa, #eaeaea);
+      -webkit-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+         -moz-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+              box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);*/
+	border-radius: 40px;
+	text-align: center;
+	width: 75%;
+	height: 50px;
+	margin: auto;
+	margin-top: 10px;
+	padding-top: 25px;
+}
+.mainButton {
+	box-shadow: #3498db 0 0 1px 1px;
+	background: #ededed;
+	color: #7e7e7e;
+	font-size: 2.5em;
+	border: none;
+	/*background: linear-gradient(to bottom, #fafafa, #eaeaea);
+      -webkit-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+         -moz-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+              box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);*/
+	border-radius: 30px;
+	text-align: center;
+	width: 90%;
+	height: 110px;
+	margin: 7px 20px;
+	padding: 0;
+}
+.mainButton:hover {
+	box-shadow: #3498db 0 0 1px 1px;
+}
+.mainButton:active {
+	background: #3498db;
+	color: #fff;
+}
+.bottomNav {
+	position: fixed;
+	width: 100%;
+	top: 440px;
+}
+
+/* END MAIN */
+
+
+/* SETTINGS */
+
+.input {
+	background: #ededed;
+	margin: 3.5%;
+	width: 92%;
+	font-size: 2em;
+	text-align: center;
+	border: 1px solid #d5d5d5;
+}
+.label {
+	margin: 0px 0px 0px 4%;
+	text-align: left;
+	font-size: 1em;
+	font-family: Verdana;
+}
+#alert {
+	background: #ededed;
+	margin: 2%;
+	padding: 3%;
+	width: 90%;
+	font-size: 1em;
+	text-align: center;
+	border-radius: 10px;
+	color: #ededed;
+	font-family: Verdana;
+}
+
+/* END SETTINGS */
+
+
+/* QR */
+
+img.center {
+	display: block;
+	margin: 0 auto;
+}
+#txInfo {
+	margin: 3.5%;
+	width: 92%;
+	font-size: 2em;
+	text-align: center;
+	font-family: Verdana;
+	color: #3498db;
+}
+#confirm {
+	margin: 3.5%;
+	width: 92%;
+	font-size: 1.5em;
+	text-align: center;
+	font-family: Verdana;
+	color: #7e7e7e;
+}
+@keyframes blink {
+	/**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+	0% {
+		opacity: .2;
+	}
+	/**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+	20% {
+		opacity: 1;
+	}
+	/**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+	100% {
+		opacity: .2;
+	}
+}
+.waiting span {
+	/**
+     * Use the blink animation, which is defined above
+     */
+	animation-name: blink;
+	/**
+     * The animation should take 1.4 seconds
+     */
+	animation-duration: 1.4s;
+	/**
+     * It will repeat itself forever
+     */
+	animation-iteration-count: infinite;
+	/**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+	animation-fill-mode: both;
+}
+.waiting span:nth-child(2) {
+	/**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+	animation-delay: .2s;
+}
+.waiting span:nth-child(3) {
+	/**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+	animation-delay: .4s;
+}
+
+/* END QR */
+
+
+/* IPAD */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	/* STYLES GO HERE */
+}
+
+/* SMALL PHONES */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 360px) {
+	.mainButton {
+		box-shadow: #3498db 0 0 1px 1px;
+		background: #ededed;
+		color: #7e7e7e;
+		font-size: 2em;
+		border: none;
+		border-radius: 30px;
+		text-align: center;
+		width: 90%;
+		height: 80px;
+		margin: 7px;
+		padding: 0;
+	}
+	.price {
+		font-size: .9em;
+		width: 65%;
+		height: 40px;
+		margin: auto;
+		margin-top: 10px;
+		padding-top: 25px;
+	}
+	#txInfo {
+		font-size: 1.5em;
+	}
+	#confirm {
+		font-size: 1em;
+	}
+	#alert {
+		font-size: .9em;
+	}
+	.input {
+		font-size: 1.5em;
+	}
+	.label {
+		font-size: .9em;
+	}
+	.bottomNav {
+		position: fixed;
+		width: 100%;
+		top: 340px;
+	}
+}
+@media only screen and (min-device-width: 360px) and (max-device-width: 430px) {
+	.bottomNav {
+		position: fixed;
+		width: 100%;
+		top: 400px;
+	}
+}

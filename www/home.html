@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+	<!--
+	<meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline';
+														media-src *" />
+-->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://*.coinmarketcap.com;
+														style-src 'self' 'unsafe-inline';
+              											img-src 'self';
+           												script-src 'self' 'unsafe-inline'">
+
+	<title>DashPay</title>
+
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/newsale.css">
+
+
+</head>
+
+<body>
+
+	<!-- HOME SCREEN -->
+	<div id="home" class="">
+		<div class='mainBox'>
+			<img class='headerImage' src='img/placehold.png'>
+			<button onclick='newSale()' class='mainButton'>new sale</button>
+			<br>
+			<button onclick='recentSales()' class='mainButton'>recent sales</button>
+			<br>
+			<button onclick='settings()' class='mainButton'>settings</button>
+			<div class='price'></div>
+		</div>
+	</div>
+	<!-- END HOME -->
+
+	<!-- NEW SALE -->
+	<div id="newSale" class="hidden">
+		<div class='mainBox'>
+			<form action='' method='' name='PINform' id='PINform' autocomplete='off'>
+				<input id='PINbox' type='text' value='' name='PINbox' disabled />
+				<br/>
+				<input type='button' class='PINbutton PINbuttonNum' name='1' value='1' id='1' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='2' value='2' id='2' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='3' value='3' id='3' onClick=addNumber(this); />
+				<br>
+				<input type='button' class='PINbutton PINbuttonNum' name='4' value='4' id='4' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='5' value='5' id='5' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='6' value='6' id='6' onClick=addNumber(this); />
+				<br>
+				<input type='button' class='PINbutton PINbuttonNum' name='7' value='7' id='7' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='8' value='8' id='8' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='9' value='9' id='9' onClick=addNumber(this); />
+				<br>
+				<input type='button' class='PINbutton PINbuttonNum' name='.' value='.' id='dot' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='0' value='0' id='0' onClick=addNumber(this); />
+				<input type='button' class='PINbutton PINbuttonNum' name='00' value='00' id='00' onClick=addNumber(this); />
+				<br>
+				<input type='button' class='PINbutton PINbuttonClear' name='cancel' value='cancel' id='cancel' onClick=goBack(); />
+				<input type='button' class='PINbutton PINbuttonClear' name='-' value='clear' id='-' onClick=clearForm(this); />
+				<input type='button' class='PINbutton PINbuttonEnter' name='+' value='enter' id='+' onClick=submitForm(PINbox); />
+			</form>
+		</div>
+	</div>
+	<!-- END NEW SALE -->
+
+	<!-- RECENT SALES -->
+	<div id="recentSales" class="hidden">
+		<div class='mainBox'>
+				<button onclick='recentSales()' class='mainButton'>back</button>
+			</div>
+		</div>
+	<!-- END RECENT SALES -->
+
+	<!-- SETTINGS -->
+	<div id="settings" class="hidden">
+		<div class='mainBox'>
+			<img class='headerImage' src='img/placehold.png'>
+			<p class='label'>Public Key:</p>
+			<input class='input' id='xpub' type='text' value='' name='xpub' />
+			<p class='label'>Business Name:</p>
+			<input class='input' id='storeName' type='text' value='' name='storename' />
+			<!--
+			<p class='label'>Server:</p>
+			<input class='input' id='server' type='text' value='' name='server' />
+-->
+
+			<div>
+				<p id='alert'></p>
+			</div>
+			<div class='bottomNav'>
+				<button onclick='settingsSave()' class='mainButton'>save</button>
+				<button onclick='settingsBack()' class='mainButton'>back</button>
+			</div>
+		</div>
+	</div>
+	<!-- END SETTINGS -->
+
+	<!-- QR -->
+	<div id="qr" class="hidden">
+		<div class='mainBox'>
+			<img class='headerImage hideMob' src='img/placehold.png'>
+
+			<div id="qrcode" class="qrImage"></div>
+			<div id="txInfo"><span id='dashFinal'>1.21</span> Dash ($<span id='cashFinal'>12.63</span>)</div>
+			<p id="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
+			<button onclick='qrDone()' class='mainButton'>done</button>
+		</div>
+	</div>
+	<!-- END QR -->
+
+	<!-- LIBS -->
+	<!--    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+	<script src='js/lib/jquery.min.js'></script>
+	<script src="js/lib/bitcoinjs-lib.js"></script>
+	<script src="js/lib/jquery-qrcode-0.14.0.min.js"></script>
+
+	<!-- SCRIPTS -->
+	<script src="js/home.js"></script>
+	<script src="js/newsale.js"></script>
+
+</body>
+
+</html>
