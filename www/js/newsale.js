@@ -1,6 +1,9 @@
 /*jslint browser: true*/
 /*global $, console, key, BIP32, jQuery, alert*/
 
+//to change from testnet to mainnet change 'test' to 'prod' in this file
+//and change 0x8b to 0x4c in wizard.js
+
 //precision (8 decimal) rounding for dash
 function roundNumber(num, dec) {
 	return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
@@ -64,6 +67,8 @@ function submitForm(e) {
 
 			var merchant = encodeURI(localStorage.getItem('storeName'));
 			console.log(merchant);
+			
+			Bitcoin.setNetwork('test'); //prod for mainnet and test for testnet
 
 			//create new key instance
 			key = new BIP32(source_key);

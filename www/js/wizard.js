@@ -11,7 +11,7 @@ var network = {
 		public: 0x0488b21e,
 		private: 0x0488ade4
 	},
-	pubKeyHash: 0x4c,
+	pubKeyHash: 0x8b, //0x8b testnet and 0x4c mainnet
 	scriptHash: 0x10,
 	wif: 0xcc
 };
