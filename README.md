@@ -31,8 +31,12 @@ Pending
 * Finish implementing current features
 * Change 'InstantX' logo to 'InstantSend' 
 * Change from localStorage to localForage
-* TEST and better error handling (Empty price alert)
-* Cordova/PhoneGape builds
+* TEST and better error handling
+	- Empty price alert
+	- Link to block explorer for manual verification
+	- 0.00 price should not work
+	- Something to denote what currency is being used
+* Cordova/PhoneGap builds
 * Electron Builds
 
 # TO-DO
