@@ -6,16 +6,20 @@
 
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="msapplication-tap-highlight" content="no" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<!--	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />-->
 	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-	<!--
+	<meta name="viewport" content=" user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+
+
 	<meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline';
 														media-src *" />
--->
+
+	<!--
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://*.coinmarketcap.com;
 														style-src 'self' 'unsafe-inline';
               											img-src 'self';
            												script-src 'self' 'unsafe-inline'">
+-->
 
 	<title>DashPay</title>
 
@@ -30,13 +34,15 @@
 	<!-- HOME SCREEN -->
 	<div id="home" class="">
 		<div class='mainBox'>
-			<img class='headerImage' src='img/placehold.png'>
+			<img class='headerImage' src='img/dashpay.png'>
 			<button onclick='newSale()' class='mainButton'>new sale</button>
 			<br>
 			<button onclick='recentSales()' class='mainButton'>recent sales</button>
 			<br>
 			<button onclick='settings()' class='mainButton'>settings</button>
 			<div class='price'></div>
+			<br>
+			<div id='status' class='notConnected'>not connected</div>
 		</div>
 	</div>
 	<!-- END HOME -->
@@ -45,7 +51,11 @@
 	<div id="newSale" class="hidden">
 		<div class='mainBox'>
 			<form action='' method='' name='PINform' id='PINform' autocomplete='off'>
-				<input id='PINbox' type='text' value='' name='PINbox' disabled />
+				<div class="InputAddOn">
+					<input class="InputAddOn-field" id='PINbox' type='text' value='' name='PINbox' disabled />
+					<span id='currency' class="InputAddOn-item">USD</span>
+				</div>
+<!--				<input id='PINbox' type='text' value='' name='PINbox' disabled />-->
 				<br/>
 				<input type='button' class='PINbutton PINbuttonNum' name='1' value='1' id='1' onClick=addNumber(this); />
 				<input type='button' class='PINbutton PINbuttonNum' name='2' value='2' id='2' onClick=addNumber(this); />
@@ -74,23 +84,22 @@
 	<!-- RECENT SALES -->
 	<div id="recentSales" class="hidden">
 		<div class='mainBox'>
-				<button onclick='recentSales()' class='mainButton'>back</button>
-			</div>
+			<button onclick='recentSales()' class='mainButton'>back</button>
 		</div>
+	</div>
 	<!-- END RECENT SALES -->
 
 	<!-- SETTINGS -->
 	<div id="settings" class="hidden">
 		<div class='mainBox'>
-			<img class='headerImage' src='img/placehold.png'>
+			<img class='headerImage' src='img/dashpay.png'>
 			<p class='label'>Public Key:</p>
 			<input class='input' id='xpub' type='text' value='' name='xpub' />
 			<p class='label'>Business Name:</p>
 			<input class='input' id='storeName' type='text' value='' name='storename' />
-			<!--
-			<p class='label'>Server:</p>
+			<p class='label'>Server: (http://server:port)</p>
 			<input class='input' id='server' type='text' value='' name='server' />
--->
+
 
 			<div>
 				<p id='alert'></p>
@@ -106,12 +115,15 @@
 	<!-- QR -->
 	<div id="qr" class="hidden">
 		<div class='mainBox'>
-			<img class='headerImage hideMob' src='img/placehold.png'>
+			<img class='headerImage hideMob' src='img/dashpay.png'>
 
 			<div id="qrcode" class="qrImage"></div>
+			<br>
 			<div id="txInfo"><span id='dashFinal'>1.21</span> Dash ($<span id='cashFinal'>12.63</span>)</div>
 			<p id="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
-			<button onclick='qrDone()' class='mainButton'>done</button>
+			<div class='bottomNav'>
+				<button onclick='qrDone()' class='mainButton'>done</button>
+			</div>
 		</div>
 	</div>
 	<!-- END QR -->
@@ -121,6 +133,7 @@
 	<script src='js/lib/jquery.min.js'></script>
 	<script src="js/lib/bitcoinjs-lib.js"></script>
 	<script src="js/lib/jquery-qrcode-0.14.0.min.js"></script>
+	<script src='js/lib/socket.io.min.js'></script>
 
 	<!-- SCRIPTS -->
 	<script src="js/home.js"></script>

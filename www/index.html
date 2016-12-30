@@ -6,12 +6,14 @@
 
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="msapplication-tap-highlight" content="no" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<!--	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />-->
 	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
 	<!--
 	<meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline';
 														media-src *" />
 -->
+	<meta name="viewport" content=" user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://*.coinmarketcap.com;
 														style-src 'self' 'unsafe-inline';
               											img-src 'self';
@@ -24,12 +26,14 @@
 	<link rel="stylesheet" href="css/wizard.css">
 
 	
+<!--
     <script>
         var visited = localStorage.getItem('visited');
         if (visited) {
             window.location.href = "home.html";
         }
     </script>
+-->
 
 
 
@@ -42,7 +46,7 @@
 		<!-- PAGE 1 -->
 		<div id="wizard1" class="">
 			<div class='mainBox'>
-				<img class='headerImage' src='img/placehold.png'>
+				<img class='headerImage' src='img/dashpay.png'>
 				<br>
 				<div class="welcome basic" id="welcome">Welcome to DashPay!</div>
 				<br>
@@ -61,7 +65,7 @@
 		<!-- PAGE 2 -->
 		<div id="wizard2" class="hidden">
 			<div class='mainBox'>
-				<img class='headerImage' src='img/placehold.png'>
+				<img class='headerImage' src='img/dashpay.png'>
 				<p class="basic heading1 grey" id='storeNameLabel'>Business Name:</p>
 				<input class='basic biginput' id='storeName' type='text' value='' name='storeName' />
 				<br>
@@ -79,7 +83,7 @@
 		<!-- PAGE 3 -->
 		<div id="wizard3" class="hidden">
 			<div class='mainBox'>
-				<img class='headerImage' src='img/placehold.png'>
+				<img class='headerImage' src='img/dashpay.png'>
 				<br>
 				<p class='basic heading1 grey'>Public Key:</p>
 				<input class='basic smallinput' id='xpubgen' type='text' value='' name='xpubgen' />

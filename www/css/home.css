@@ -20,10 +20,10 @@ body {
 	margin-bottom: 25px;
 }
 .price {
-	box-shadow: #3498db 0 0 1px 1px;
-	background: #3498db;
+	box-shadow: #1c75bc 0 0 1px 1px;
+	background: #1c75bc;
 	color: #fff;
-	font-size: 1.2em;
+	font-size: 2.7vh;
 	font-family: Verdana;
 	border: none;
 	/*background: linear-gradient(to bottom, #fafafa, #eaeaea);
@@ -33,16 +33,16 @@ body {
 	border-radius: 40px;
 	text-align: center;
 	width: 75%;
-	height: 50px;
+	height: 6.8vh;
 	margin: auto;
 	margin-top: 10px;
 	padding-top: 25px;
 }
 .mainButton {
-	box-shadow: #3498db 0 0 1px 1px;
+	box-shadow: #1c75bc 0 0 1px 1px;
 	background: #ededed;
 	color: #7e7e7e;
-	font-size: 2.5em;
+	font-size: 6vh;
 	border: none;
 	/*background: linear-gradient(to bottom, #fafafa, #eaeaea);
       -webkit-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
@@ -51,21 +51,66 @@ body {
 	border-radius: 30px;
 	text-align: center;
 	width: 90%;
-	height: 110px;
+	height: 14vh;
 	margin: 7px 20px;
 	padding: 0;
 }
 .mainButton:hover {
-	box-shadow: #3498db 0 0 1px 1px;
+	box-shadow: #1c75bc 0 0 1px 1px;
 }
 .mainButton:active {
-	background: #3498db;
+	background: #1c75bc;
 	color: #fff;
+	-webkit-transform: scale3d(0.9, 0.9, 1);
+}
+.mainButton:focus {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-tap-highlight-color: transparent;
 }
 .bottomNav {
 	position: fixed;
 	width: 100%;
-	top: 400px;
+	bottom: 3%;
+}
+.connected {
+	color: #47cf73;
+}
+.notConnected {
+	color: #ff3c41;
+}
+.InputAddOn {
+	display: flex;
+	background: #ededed;
+	margin: 3.5%;
+	width: 92%;
+	text-align: center;
+	margin-bottom: 0px;
+}
+.InputAddOn-field {
+	flex: 1;
+	font-size: 3em;
+	width: 92%;
+	background: #ededed;
+	text-align: center;
+}
+.InputAddOn-field:not(:first-child) {
+	border-left: 0;
+}
+.InputAddOn-item {
+	background-color: rgba(147, 128, 108, 0.1);
+	color: #666666;
+	font: inherit;
+	font-size: 1em;
+	font-weight: normal;
+	padding: 1.2em .5em 1.2em .5em;
+}
+.InputAddOn-field,
+.InputAddOn-item {
+	border: 1px solid #d5d5d5;
+}
+.InputAddOn-field:last-child,
+.InputAddOn-item:last-child {
+	border-radius: 0 2px 2px 0;
 }
 
 /* END MAIN */
@@ -111,10 +156,10 @@ img.center {
 #txInfo {
 	margin: 3.5%;
 	width: 92%;
-	font-size: 2em;
+	font-size: 4vh;
 	text-align: center;
 	font-family: Verdana;
-	color: #3498db;
+	color: #1c75bc;
 }
 #confirm {
 	margin: 3.5%;
@@ -187,63 +232,3 @@ img.center {
 }
 
 /* END QR */
-
-
-/* IPAD */
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-	/* STYLES GO HERE */
-}
-
-/* SMALL PHONES */
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 360px) {
-	.mainButton {
-		box-shadow: #3498db 0 0 1px 1px;
-		background: #ededed;
-		color: #7e7e7e;
-		font-size: 2em;
-		border: none;
-		border-radius: 30px;
-		text-align: center;
-		width: 90%;
-		height: 80px;
-		margin: 7px;
-		padding: 0;
-	}
-	.price {
-		font-size: .9em;
-		width: 65%;
-		height: 40px;
-		margin: auto;
-		margin-top: 10px;
-		padding-top: 25px;
-	}
-	#txInfo {
-		font-size: 1.5em;
-	}
-	#confirm {
-		font-size: 1em;
-	}
-	#alert {
-		font-size: .9em;
-	}
-	.input {
-		font-size: 1.5em;
-	}
-	.label {
-		font-size: .9em;
-	}
-	.bottomNav {
-		position: fixed;
-		width: 100%;
-		top: 340px;
-	}
-}
-@media only screen and (min-device-width: 360px) and (max-device-width: 430px) {
-	.bottomNav {
-		position: fixed;
-		width: 100%;
-		top: 400px;
-	}
-}

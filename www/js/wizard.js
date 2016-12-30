@@ -107,6 +107,7 @@ function wizardBack() {
 function generate() {
 	var storeName = $("#storeName").val();
 	localStorage.setItem('storeName', storeName);
+	localStorage.setItem('server', 'http://localhost:5005');
 	generateClicked();
 	$("#wizard2").toggleClass("hidden");
 	$("#wizard3").toggleClass("hidden");
