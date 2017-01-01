@@ -67,32 +67,54 @@ $(document).ready(function () {
 		stat.attr('class', 'notConnected');
 	});
 	//Terminal events
+	//on success
 	socket.on('term:final', function (msg) {
 		console.log("term:final: ", msg);
 		wch = JSON.parse(msg);
-		$("#qr").toggleClass("hidden");
-		$("#qrConfirm").toggleClass("hidden");
+
+		if ($("#qrPartial").hasClass("hidden") && $("#home").hasClass("hidden")) {
+			$("#qr").toggleClass("hidden");
+			$("#qrConfirm").toggleClass("hidden");
+		} else if ($("#home").hasClass("hidden") !== true) {
+			$("#qrConfirm").toggleClass("hidden");
+			$("#home").toggleClass("hidden");
+		} else {
+			$("#qrPartial").toggleClass("hidden");
+			$("#qrConfirm").toggleClass("hidden");
+		}
 	});
+	//on partial payment
 	socket.on('term:partial', function (msg) {
 		console.log("term:partial ", msg);
 		wch = JSON.parse(msg);
-		// Destroy the current entry
-		$("#txc-{0}".format(wch.Address)).first().remove();
-		// Create a new element for the active watch
-		var elm = $().add(
-			'<li id="txc-{0}">'.format(wch.Address)
-		);
-		elm.loadTemplate($("#tpl-watch-curr"), {
-			"Total": (wch.Total / 100000000).toFixed(4),
-			"Amount": (wch.Amount / 100000000).toFixed(4),
-			"Address": wch.Address
-		});
-		$("#watch-curr").first().append(elm);
+
+		if ($("#qrPartial").hasClass("hidden") && $("#home").hasClass("hidden")) {
+			$("#qrPartial").toggleClass("hidden");
+			$("#qr").toggleClass("hidden");
+		} else if ($("#home").hasClass("hidden") !== true) {
+			$("#qrPartial").toggleClass("hidden");
+			$("#home").toggleClass("hidden");
+		}
+
+		var total = wch["Total"];
+		var needed = wch["Amount"];
+		var left = (needed - total) / 100000000;
+
+		console.log(total + " " + needed);
+
+		$("#partialAmount").text(left);
 	});
+	//on timeout
 	socket.on('term:timeout', function (msg) {
-		console.log("term:timeout ", msg);
-		//wch = JSON.parse(msg);
-		// ToDo Timeout setup
+		wch = JSON.parse(msg);
+		
+		if ($("#qrTimeout").hasClass("hidden") && $("#home").hasClass("hidden")) {
+			$("#qrTimeout").toggleClass("hidden");
+			$("#qr").toggleClass("hidden");
+		} else if ($("#home").hasClass("hidden") !== true) {
+			$("#qrTimeout").toggleClass("hidden");
+			$("#home").toggleClass("hidden");
+		}
 	});
 });
 
@@ -288,4 +310,4 @@ function submitForm(e) {
 		$("#newSale").toggleClass("hidden");
 		$("#qr").toggleClass("hidden");
 	}
-};
+}

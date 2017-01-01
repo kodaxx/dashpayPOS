@@ -12,6 +12,8 @@ DashPay is a mobile-friendly point-of-sale app that merchants can use to accept 
 * Enter sale amounts in your local currency (only supports USD at the moment) and have them converted to an amount in Dash using http://coinmarketcap.com exchange rate
 * A QR code payment request is generated with your receiving address, sale amount, store name, and 'use InstantSend' for your customers to scan
 * Unique addresses are used for every sale that are a part of your HD wallet. One private key
+* Get an on-screen notification when the requested amount is received at your address
+* Detects partial payments and allows multiple parties to pay the total amount owed
 
 #Planned Features
 
@@ -29,18 +31,15 @@ Pending
 * Major code clean-up/refactoring
 * Link to block explorer for manual verification
 * Manual price refresh
-* Finish implementing current features
-* Change from localStorage to localForage
-* TEST and better error handling
-	- Empty price alert
 * All Cordova/PhoneGap builds
 * Electron Builds
-* Get an on-screen notification when the requested amount is received at your address
 * Transactions and the exchange rate at the time of sale are recorded and can be viewed later
 
 # TO-DO
 
 * Change from dashjs to bitcore
+* Change from localStorage to localForage
+* TEST and better error handling
 
 # License
 

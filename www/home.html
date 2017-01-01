@@ -111,7 +111,8 @@
 		</div>
 	</div>
 	<!-- END SETTINGS -->
-
+	
+<!-- QR PAGES -->
 	<!-- QR -->
 	<div id="qr" class="hidden">
 		<div class='mainBox'>
@@ -119,8 +120,8 @@
 			<br>
 			<div id="qrcode" class="qrImage"></div>
 			<br>
-			<div id="txInfo"><span id='dashFinal'>-</span> Dash ($<span id='cashFinal'>-</span>)</div>
-			<p id="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
+			<div class="txInfo"><span id='dashFinal'>-</span> Dash ($<span id='cashFinal'>-</span>)</div>
+			<p class="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
 			<div class='bottomNav'>
 				<button onclick='qrCancel()' class='mainButton'>cancel</button>
 			</div>
@@ -136,13 +137,46 @@
 			<img src='img/confirm.png'>
 			<br>
 			<br>
-			<p id="confirm" >Payment Confirmed!</p>
+			<p class="confirm" >Payment Confirmed!</p>
 			<div class='bottomNav'>
-				<button onclick='qrDone()' class='mainButton'>done</button>
+				<button onclick='qrConfirmDone()' class='mainButton'>done</button>
 			</div>
 		</div>
 	</div>
 	<!-- END QR CONFIRM -->
+	
+	<!-- QR PARTIAL -->
+	<div id="qrPartial" class="hidden">
+		<div class='mainBox'>
+			<img class='headerImage' src='img/dashpay.png'>
+			<br>
+			<img src='img/partial.png'>
+			<br>
+			<div class="txInfo"><span id='partialAmount'>-</span> Dash remaining</div>
+			<p class="confirm" >Partial Payment!</p>
+			<div class='bottomNav'>
+				<button onclick='qrPartialDone()' class='mainButton'>done</button>
+			</div>
+		</div>
+	</div>
+	<!-- END QR PARTIAL -->
+	
+	<!-- QR TIMEOUT -->
+	<div id="qrTimeout" class="hidden">
+		<div class='mainBox'>
+			<img class='headerImage' src='img/dashpay.png'>
+			<br>
+			<img src='img/timeout.png'>
+			<br>
+			<br>
+			<p class="confirm" >Payment Timeout</p>
+			<div class='bottomNav'>
+				<button onclick='qrTimeoutDone()' class='mainButton'>done</button>
+			</div>
+		</div>
+	</div>
+	<!-- END QR TIMEOUT -->
+<!-- END QR PAGES -->
 
 	<!-- LIBS -->
 	<!--    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->

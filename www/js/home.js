@@ -111,11 +111,27 @@ function qrCancel() {
 
 	$("#qrcode").empty();
 }
-function qrDone() {
+function qrConfirmDone() {
 	$("#PINbox").val("");
 
 	$("#home").toggleClass("hidden");
 	$("#qrConfirm").toggleClass("hidden");
+
+	$("#qrcode").empty();
+}
+function qrPartialDone() {
+	$("#PINbox").val("");
+
+	$("#home").toggleClass("hidden");
+	$("#qrPartial").toggleClass("hidden");
+
+	$("#qrcode").empty();
+}
+function qrTimeoutDone() {
+	$("#PINbox").val("");
+
+	$("#home").toggleClass("hidden");
+	$("#qrTimeout").toggleClass("hidden");
 
 	$("#qrcode").empty();
 }
