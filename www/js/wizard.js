@@ -8,16 +8,16 @@ var bip32RootKey = null;
 var bip32ExtendedKey = null;
 var network = {
 	bip32: {
-		public: 0x0488b21e,
-		private: 0x0488ade4
+		public: 0x043587CF, //0x0488b21e mainnet and 0x043587cf (bitcoin) testnet and 0x3a8061a0 (dash) testnet //todo
+		private: 0x04358394 //0x0488ade4 mainnet and 0x04358394 (bitcoin) testnet and 0x3a805837 (dash) testnet //todo
 	},
-	pubKeyHash: 0x8b, //0x8b testnet and 0x4c mainnet
-	scriptHash: 0x10,
-	wif: 0xcc
+	pubKeyHash: 0x8C, //0x8b testnet and 0x4c mainnet //todo
+	scriptHash: 0x13, //0x13 testnet and 0x10 mainnet //todo
+	wif: 0xef //0xef testnet and 0xcc mainnet
 };
 
 function generateRandomPhrase() {
-	var numWords = 15,
+	var numWords = 24,
 		strength = numWords / 3 * 32,
 		words = mnemonic.generate(strength);
 	//outputs words to console
@@ -54,7 +54,7 @@ function calcBip32ExtendedKey(path) {
 }
 
 function bip44() {
-	var path = "m/44'/5'/0'/";
+	var path = "m/44'/1'/0'/"; //todo m/44'/5'/0'/
 	// Calculate the account extended keys
 	var accountExtendedKey = calcBip32ExtendedKey(path);
 	var accountXprv = accountExtendedKey.toBase58();
@@ -107,7 +107,7 @@ function wizardBack() {
 function generate() {
 	var storeName = $("#storeName").val();
 	localStorage.setItem('storeName', storeName);
-	localStorage.setItem('server', 'http://localhost:5005');
+	localStorage.setItem('server', 'http://45.32.157.221:8080');
 	generateClicked();
 	$("#wizard2").toggleClass("hidden");
 	$("#wizard3").toggleClass("hidden");

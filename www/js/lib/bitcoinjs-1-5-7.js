@@ -9436,7 +9436,7 @@ Address.fromBase58Check = function (string) {
 }
 
 Address.fromOutputScript = function (script, network) {
-  network = network || networks.bitcoin
+  network = network || networks.bitcoin //todo
 
   if (scripts.isPubKeyHashOutput(script)) return new Address(script.chunks[2], network.pubKeyHash)
   if (scripts.isScriptHashOutput(script)) return new Address(script.chunks[1], network.scriptHash)
@@ -10799,9 +10799,9 @@ var networks = {
       public: 0x0488b21e,
       private: 0x0488ade4
     },
-    pubKeyHash: 0x00,
-    scriptHash: 0x05,
-    wif: 0x80,
+    pubKeyHash: 0x4c,
+    scriptHash: 0x10,
+    wif: 0xcc,
     dustThreshold: 546, // https://github.com/bitcoin/bitcoin/blob/v0.9.2/src/core.h#L151-L162
     feePerKb: 10000, // https://github.com/bitcoin/bitcoin/blob/v0.9.2/src/main.cpp#L53
     estimateFee: estimateFee('bitcoin')
@@ -10809,12 +10809,12 @@ var networks = {
   testnet: {
     magicPrefix: '\x18Bitcoin Signed Message:\n',
     bip32: {
-      public: 0x043587cf,
-      private: 0x04358394
+      public: 0x043587cf, //0x043587cf (bitcoin) testnet and 0x3a8061a0 (dash) testnet //todo
+	  private: 0x04358394 // 0x04358394 (bitcoin) testnet and 0x3a805837 (dash) testnet //todo
     },
-    pubKeyHash: 0x6f,
-    scriptHash: 0xc4,
-    wif: 0xef,
+    pubKeyHash: 0x8b,
+    scriptHash: 0x13,
+    wif: 0xEF,
     dustThreshold: 546,
     feePerKb: 10000,
     estimateFee: estimateFee('testnet')

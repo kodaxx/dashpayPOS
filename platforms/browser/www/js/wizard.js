@@ -11,13 +11,13 @@ var network = {
 		public: 0x0488b21e,
 		private: 0x0488ade4
 	},
-	pubKeyHash: 0x4c,
+	pubKeyHash: 0x4c, //0x8b testnet and 0x4c mainnet
 	scriptHash: 0x10,
 	wif: 0xcc
 };
 
 function generateRandomPhrase() {
-	var numWords = 15,
+	var numWords = 24,
 		strength = numWords / 3 * 32,
 		words = mnemonic.generate(strength);
 	//outputs words to console
@@ -107,6 +107,7 @@ function wizardBack() {
 function generate() {
 	var storeName = $("#storeName").val();
 	localStorage.setItem('storeName', storeName);
+	localStorage.setItem('server', 'http://localhost:5005');
 	generateClicked();
 	$("#wizard2").toggleClass("hidden");
 	$("#wizard3").toggleClass("hidden");

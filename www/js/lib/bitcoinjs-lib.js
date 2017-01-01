@@ -4898,7 +4898,7 @@ Bitcoin.ECKey = (function () {
     this.compressed = (this.compressed == undefined) ? !!ECKey.compressByDefault : this.compressed;
   };
 
-  ECKey.privateKeyPrefix = 0x80; // mainnet 0x80    testnet 0xEF
+  ECKey.privateKeyPrefix = 0x80; // mainnet 0x80    testnet 0xEF or 0x13
 
   /**
    * Whether public keys should be returned compressed by default.
@@ -6508,8 +6508,8 @@ TransactionDatabase.prototype.clear = function () {
 
 var MAINNET_PUBLIC = 0x0488b21e;
 var MAINNET_PRIVATE = 0x0488ade4;
-var TESTNET_PUBLIC = 0x043587cf;
-var TESTNET_PRIVATE = 0x04358394;
+var TESTNET_PUBLIC = 0x043587cf;//original tpub 0x043587cf; //todo (dash) testnet 0x3a8061a0
+var TESTNET_PRIVATE = 0x04358394;//original tprv 0x04358394; //todo (dash) testnet 0x3a805837
 
 var BIP32 = function(bytes) {
     // decode base58
@@ -6777,16 +6777,16 @@ function decompress_pubkey(key_bytes) {
   Bitcoin.setNetwork = function(network) {
     if (network == 'prod') {
       Bitcoin.Address.pubKeyHashVersion = 0x4c;
-      Bitcoin.Address.p2shVersion    = 0x5;
-      Bitcoin.ECKey.privateKeyPrefix = 0x80;
+      Bitcoin.Address.p2shVersion    = 0x10;
+      Bitcoin.ECKey.privateKeyPrefix = 0x80; // 0x80 original - maybe 0xcc? //todo
     } else {
       // test network
-      Bitcoin.Address.pubKeyHashVersion = 0x8b;
-      Bitcoin.Address.p2shVersion    = 0xc4;
+      Bitcoin.Address.pubKeyHashVersion = 0x8C;
+      Bitcoin.Address.p2shVersion    = 0x13;
       Bitcoin.ECKey.privateKeyPrefix = 0xef;
     }
   }
-  Bitcoin.setNetwork('prod');
+  Bitcoin.setNetwork('prod'); //todo
   
   // WARNING:  It's bad form to set a function on the global array prototype here.
   Array.prototype.compare = function (array) {

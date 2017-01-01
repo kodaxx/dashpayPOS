@@ -7,19 +7,18 @@ DashPay is a mobile-friendly point-of-sale app that merchants can use to accept 
 # Current Features
 
 * Works on Android, iOS, Windows Phone - Mac, Windows, Linux
+* Compatible with Trezor/KeepKey/Ledger Hardware Wallets
 * Generate a new account on first run. Customize store name, create backups, etc.
 * Enter sale amounts in your local currency (only supports USD at the moment) and have them converted to an amount in Dash using http://coinmarketcap.com exchange rate
 * A QR code payment request is generated with your receiving address, sale amount, store name, and 'use InstantSend' for your customers to scan
 * Unique addresses are used for every sale that are a part of your HD wallet. One private key
-* ~~Get an on-screen notification when the requested amount is received at your address~~
-* ~~Transactions and the exchange rate at the time of sale are recorded and can be viewed later~~
 
 #Planned Features
 
 * NFC touch-to-pay with mobile phones using Dash Wallet
+* Multiple currency support (USD, CAD, UAD, etc.)
 * Offline payments system using plastic EMV-type cards for customers
 * Ability to have payments converted to fiat instantly
-* Compatible with Trezor
 
 # Installation
 
@@ -28,16 +27,16 @@ Pending
 # TO-DO before first release
 
 * Major code clean-up/refactoring
+* Link to block explorer for manual verification
+* Manual price refresh
 * Finish implementing current features
-* Change 'InstantX' logo to 'InstantSend' 
 * Change from localStorage to localForage
 * TEST and better error handling
 	- Empty price alert
-	- Link to block explorer for manual verification
-	- 0.00 price should not work
-	- Something to denote what currency is being used
-* Cordova/PhoneGap builds
+* All Cordova/PhoneGap builds
 * Electron Builds
+* Get an on-screen notification when the requested amount is received at your address
+* Transactions and the exchange rate at the time of sale are recorded and can be viewed later
 
 # TO-DO
 

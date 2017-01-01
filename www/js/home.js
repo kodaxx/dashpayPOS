@@ -96,15 +96,26 @@ if (localStorage.getItem('server')) {
     $('#server').val(localStorage.getItem('server'));
     console.log("server Retrieved");
 }
+if (localStorage.getItem('xPubKeyHashTerm')) {
+    console.log("Term ID: " + localStorage.getItem('xPubKeyHashTerm'));
+}
 //----- END SETTINGS -----
 
 //----- QR -----
 //onclick show home, hide qr, clear qr code and sale value
-function qrDone() {
+function qrCancel() {
 	$("#PINbox").val("");
 
 	$("#home").toggleClass("hidden");
 	$("#qr").toggleClass("hidden");
+
+	$("#qrcode").empty();
+}
+function qrDone() {
+	$("#PINbox").val("");
+
+	$("#home").toggleClass("hidden");
+	$("#qrConfirm").toggleClass("hidden");
 
 	$("#qrcode").empty();
 }

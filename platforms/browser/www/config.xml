@@ -18,4 +18,6 @@
     <preference name="android-minSdkVersion" value="14" />
     <preference name="orientation" value="portrait" />
     <preference name="KeyboardShrinksView" value="true" />
+    <preference name="android-windowSoftInputMode" value="adjustPan" />
+    <preference name="Fullscreen" value="false" />
 </widget>

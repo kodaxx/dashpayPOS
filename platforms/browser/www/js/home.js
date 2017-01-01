@@ -1,15 +1,17 @@
 /*jslint browser: true*/
 /*global $, console, jQuery, alert*/
-
+$.ajaxSetup({
+    async: false
+});
 //----- HOME PAGE -----
-//get price from coinmarketcap for ticker
+var price;
+
 $.getJSON("https://api.coinmarketcap.com/v1/ticker/dash/", function (data) {
 	//rounding to get 2 decimals
-	var price = Math.round(data[0].price_usd * 100) / 100;
-	$("div.price").html(function () {
-		return "<span>1 dash is currently $</span><span id='dashPrice'>" + price + "</span>";
+	price = Math.round(data[0].price_usd * 100) / 100;
 	});
-});
+
+$("div.price").html("<span>1 dash is currently $</span><span id='dashPrice'>" + price + "</span>");
 
 //onclick show new sale screen and hide home
 function newSale() {
@@ -42,17 +44,18 @@ function settingsBack() {
 //onclick save xpub key, storename
 function settingsSave() {
 	var storeName = $('#storeName').val(),
-		xpubKey = $('#xpub').val();
-
+		xpubKey = $('#xpub').val(),
+		server = $('#server').val();
+	
 	//if the xpub is empty show alert
 	if ($("#xpub").val() === '') {
-		$('#alert').css("background-color", "#d01540");
+		$('#alert').css("background-color", "#ff3c41");
 		$('#alert').html("<strong>Warning!</strong> You left the public key empty.");
 		console.log("xpub Empty!");
 		return false;
 	}
 	if ($("#storeName").val() === '') {
-		$('#alert').css("background-color", "#d01540");
+		$('#alert').css("background-color", "#ff3c41");
 		$('#alert').html("<strong>Warning!</strong> You left the store name empty.");
 		console.log("storeName Empty!");
 		return false;
@@ -60,8 +63,9 @@ function settingsSave() {
 	//if the xpub key is being resaved show alert
 	if (localStorage.getItem('xpubKey') === xpubKey) {
 		localStorage.setItem('storeName', storeName);
-		$('#alert').css("background-color", "#15d09d");
-		$('#alert').html("<strong>Success!</strong> Store name has been updated.");
+		localStorage.setItem('server', server);
+		$('#alert').css("background-color", "#47cf73");
+		$('#alert').html("<strong>Success!</strong> Business name has been updated.");
 		console.log("Updated storeName");
 		return false;
 	}
@@ -71,8 +75,8 @@ function settingsSave() {
 	localStorage.setItem('storeName', storeName);
 	console.log("index is 0");
 	console.log("Store name is: " + storeName);
-	$('#alert').css("background-color", "#15d09d");
-	$('#alert').html("<strong>Success!</strong> new public key has been saved.");
+	$('#alert').css("background-color", "#47cf73");
+	$('#alert').html("<strong>Success!</strong> New public key has been saved.");
 	console.log("xpub Saved");
 }
 
@@ -82,10 +86,15 @@ if (localStorage.getItem('xpubKey')) {
     console.log("xpub Retrieved");
 }
 
-//if there is a store name is localStorage then load it
+//if there is a store name in localStorage then load it
 if (localStorage.getItem('storeName')) {
     $('#storeName').val(localStorage.getItem('storeName'));
     console.log("storeName Retrieved");
+}
+
+if (localStorage.getItem('server')) {
+    $('#server').val(localStorage.getItem('server'));
+    console.log("server Retrieved");
 }
 //----- END SETTINGS -----
 
