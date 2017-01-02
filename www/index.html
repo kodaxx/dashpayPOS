@@ -44,7 +44,7 @@
 	<div style="display:flex;justify-content:center;align-items:center;">
 		<!-- FIRST TIME WIZARD -->
 		<!-- PAGE 1 -->
-		<div id="wizard1" class="">
+		<div id="wizard1" class="hideable">
 			<div class='mainBox'>
 				<img class='headerImage' src='img/dashpay.png'>
 				<br>
@@ -55,15 +55,15 @@
 				<br>
 				<br>
 				<div class='bottomNav'>
-					<button onclick='next()' class='mainButton'>new account</button>
-					<button onclick='existing()' class='mainButton'>existing account</button>
+					<button onclick='showhide("#wizard2")' class='mainButton'>new account</button>
+					<button onclick='firstRun()' class='mainButton'>existing account</button>
 				</div>
 			</div>
 		</div>
 		<!-- END PAGE 1 -->
 
 		<!-- PAGE 2 -->
-		<div id="wizard2" class="hidden">
+		<div id="wizard2" class="hidden hideable">
 			<div class='mainBox'>
 				<img class='headerImage' src='img/dashpay.png'>
 				<p class="basic heading1 grey" id='storeNameLabel'>Business Name:</p>
@@ -73,15 +73,15 @@
 				<br>
 				<br>
 				<div class='bottomNav'>
-					<button onclick='generate()' class='mainButton'>generate</button>
-					<button onclick='next()' class='mainButton'>back</button>
+					<button id='letsjam' onclick='generate()' class='mainButton'>generate</button>
+					<button onclick='showhide("#wizard1")' class='mainButton'>back</button>
 				</div>
 			</div>
 		</div>
 		<!-- END PAGE 2 -->
 
 		<!-- PAGE 3 -->
-		<div id="wizard3" class="hidden">
+		<div id="wizard3" class="hidden hideable">
 			<div class='mainBox'>
 				<img class='headerImage' src='img/dashpay.png'>
 				<br>
@@ -93,7 +93,7 @@
 				<br>
 				<div class='bottomNav'>
 					<button style='visibility: hidden' class='mainButton'></button>
-					<button onclick='existing()' class='mainButton'>done</button>
+					<button onclick='firstRun()' class='mainButton'>done</button>
 				</div>
 			</div>
 		</div>
@@ -110,6 +110,7 @@
 
 	<!-- SCRIPTS -->
 	<script src="js/wizard.js"></script>
+	<script src="js/home.js"></script>
 
 </body>
 

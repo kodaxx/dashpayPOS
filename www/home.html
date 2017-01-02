@@ -94,7 +94,7 @@
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<p class='label'>Public Key:</p>
-			<input class='input' id='xpub' type='text' value='' name='xpub' />
+			<input class='input' id='xpubKey' type='text' value='' name='xpub' />
 			<p class='label'>Business Name:</p>
 			<input class='input' id='storeName' type='text' value='' name='storename' />
 			<p class='label'>Server: (http://server:port)</p>
@@ -106,7 +106,7 @@
 			</div>
 			<div class='bottomNav'>
 				<button onclick='settingsSave()' class='mainButton'>save</button>
-				<button onclick='showhide("#home")' class='mainButton'>back</button>
+				<button onclick='settingsClear(); showhide("#home")' class='mainButton'>back</button>
 			</div>
 		</div>
 	</div>

@@ -87,29 +87,31 @@ function generateClicked() {
 }
 //end key generation functions
 
-function next() {
-	$("#wizard1").toggleClass("hidden");
-	$("#wizard2").toggleClass("hidden");
-}
-
-function existing() {
+//detect first run, send to main page
+function firstRun() {
 	var visited = localStorage.getItem('visited');
 	localStorage.setItem('visited', true);
 	window.location.href = "home.html";
 }
 
-function wizardBack() {
-	$("#wizard1").toggleClass("hidden");
-	$("#wizard2").toggleClass("hidden");
-}
+$('input[type=text]').on('keydown', function (e) {
+	if (e.which == 13) {
+		generate();
+		e.preventDefault();
+	}
+});
 
 //onclick generate keys, populate page
 function generate() {
 	var storeName = $("#storeName").val();
-	localStorage.setItem('storeName', storeName);
-	localStorage.setItem('server', 'http://45.32.157.221:8080');
-	generateClicked();
-	$("#wizard2").toggleClass("hidden");
-	$("#wizard3").toggleClass("hidden");
+	if (storeName === '') {
+		return false;
+	} else {
+		var storeName = $("#storeName").val();
+		localStorage.setItem('storeName', storeName);
+		localStorage.setItem('server', 'http://45.32.157.221:8080');
+		generateClicked();
+		showhide("#wizard3");
+	}
 
 }
