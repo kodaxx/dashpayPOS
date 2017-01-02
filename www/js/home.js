@@ -101,22 +101,7 @@ function getSettings(key) {
 getSettings('xpubKey');
 getSettings('storeName');
 getSettings('server');
-//if there is an xpub key in localStorage then load it
-//if (localStorage.getItem('xpubKey')) {
-//	$('#xpub').val(localStorage.getItem('xpubKey'));
-//	console.log("xpub Retrieved");
-//}
-//
-////if there is a store name in localStorage then load it
-//if (localStorage.getItem('storeName')) {
-//	$('#storeName').val(localStorage.getItem('storeName'));
-//	console.log("storeName Retrieved");
-//}
-//
-//if (localStorage.getItem('server')) {
-//	$('#server').val(localStorage.getItem('server'));
-//	console.log("server Retrieved");
-//}
+
 if (localStorage.getItem('xPubKeyHashTerm')) {
 	console.log("Term ID: " + localStorage.getItem('xPubKeyHashTerm'));
 }
@@ -127,5 +112,27 @@ if (localStorage.getItem('xPubKeyHashTerm')) {
 function qrClear() {
 	$("#PINbox").val("");
 	$("#qrcode").empty();
+}
+
+function cancelTX() {
+	var termId = localStorage.getItem('xPubKeyHashTerm'),
+		addressStore = localStorage.getItem('address'),
+
+		// ToDo Verify Address input
+		ctx = {
+			Address: addressStore,
+			Terminal: termId
+		};
+		data = JSON.stringify(ctx);
+		terminal.socket.emit('watch:cancel', data, function (res) {
+			if ("ok" == res) {
+				console.log("watch:unsub:ack: Passed");
+			} else {
+				console.log("watch:unsub:ack: Failed");
+				// ToDo Error message
+				return false;
+			}
+		});
+	addressStore = localStorage.removeItem('address');
 }
 //----- END QR -----

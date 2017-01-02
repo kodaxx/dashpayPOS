@@ -3,6 +3,30 @@
 
 //to change from mainnet to testnet change 'test' to 'prod' in this file
 //and change 0x8b to 0x4c in wizard.js
+function randHash() {
+	var text = "";
+	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+	for (var i = 0; i < 32; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+}
+
+var terminal = {}
+terminal.server = localStorage.getItem('server');
+terminal.socket = io.connect(
+	terminal.server, {
+		transports: ['websocket']
+	}
+);
+if (localStorage.xPubKeyHashTerm) {
+	terminal.termId = localStorage.xPubKeyHashTerm;
+} else {
+	terminal.termId = randHash();
+	terminal.termId = localStorage.xPubKeyHashTerm;
+}
+
+
 $(document).ready(function () {
 	// First, checks if it isn't implemented yet.
 	if (!String.prototype.format) {
@@ -21,41 +45,41 @@ $(document).ready(function () {
 			return false;
 	}
 
-	function randHash() {
-		var text = "";
-		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-		for (var i = 0; i < 32; i++) {
-			text += possible.charAt(Math.floor(Math.random() * possible.length));
-		}
-		return text;
-	}
+	//	function randHash() {
+	//		var text = "";
+	//		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+	//		for (var i = 0; i < 32; i++) {
+	//			text += possible.charAt(Math.floor(Math.random() * possible.length));
+	//		}
+	//		return text;
+	//	}
 	// Temp code, spec xPub hash
-	var termId = "xPubKeyHashTerm2";
-	if (localStorage.xPubKeyHashTerm) {
-		termId = localStorage.xPubKeyHashTerm;
-	} else {
-		termId = randHash();
-		localStorage.xPubKeyHashTerm = termId;
-	}
-	// Temp code, spec xPub hash
-	var watchId = "xPubKeyHashWatch2";
-	if (localStorage.xPubKeyHashWatch) {
-		watchId = localStorage.xPubKeyHashWatch;
-	} else {
-		watchId = randHash();
-		localStorage.xPubKeyHashWatch = watchId;
-	}
+	//	var termId = "xPubKeyHashTerm2";
+	//	if (localStorage.xPubKeyHashTerm) {
+	//		termId = localStorage.xPubKeyHashTerm;
+	//	} else {
+	//		termId = randHash();
+	//		localStorage.xPubKeyHashTerm = termId;
+	//	}
+	//	// Temp code, spec xPub hash
+	//	var watchId = "xPubKeyHashWatch2";
+	//	if (localStorage.xPubKeyHashWatch) {
+	//		watchId = localStorage.xPubKeyHashWatch;
+	//	} else {
+	//		watchId = randHash();
+	//		localStorage.xPubKeyHashWatch = watchId;
+	//	}
 
-	var server = localStorage.getItem('server');
-	var socket = io.connect(
-		server, {
-			transports: ['websocket']
-		}
-	);
-	socket.on('connect', function () {
+	//	var server = localStorage.getItem('server');
+	//	var socket = io.connect(
+	//		server, {
+	//			transports: ['websocket']
+	//		}
+	//	);
+	terminal.socket.on('connect', function () {
 		stat = $('#status');
 		stat.attr('class', 'connected');
-		socket.emit('term:id', termId, function (data) {
+		terminal.socket.emit('term:id', terminal.termId, function (data) {
 			console.log("term:id:ack: ", data);
 			if ("ok" == data) {
 				stat = $('#status');
@@ -69,13 +93,13 @@ $(document).ready(function () {
 			}
 		});
 	});
-	socket.on('disconnect', function () {
+	terminal.socket.on('disconnect', function () {
 		stat = $('#status');
 		stat.attr('class', 'notConnected');
 	});
 	//Terminal events
 	//on success
-	socket.on('term:final', function (msg) {
+	terminal.socket.on('term:final', function (msg) {
 		console.log("term:final: ", msg);
 		wch = JSON.parse(msg);
 		var payments = [],
@@ -115,7 +139,7 @@ $(document).ready(function () {
 
 	});
 	//on partial payment
-	socket.on('term:partial', function (msg) {
+	terminal.socket.on('term:partial', function (msg) {
 		console.log("term:partial ", msg);
 		wch = JSON.parse(msg);
 
@@ -142,11 +166,32 @@ $(document).ready(function () {
 		$("#partialAmount").text(left);
 	});
 	//on timeout
-	socket.on('term:timeout', function (msg) {
+	terminal.socket.on('term:timeout', function (msg) {
 		wch = JSON.parse(msg);
 
 		showPage('#qrTimeout');
 	});
+
+	//	$(".cancelTX").click(function () {
+	//		var termId = localStorage.getItem('xPubKeyHashTerm'),
+	//			addressStore = localStorage.getItem('address'),
+	//
+	//			ctx = {
+	//				Address: addressStore,
+	//				Terminal: termId
+	//			};
+	//		data = JSON.stringify(ctx);
+	//		socket.emit('watch:cancel', data, function (res) {
+	//			if ("ok" == res) {
+	//				console.log("watch:unsub:ack: Passed");
+	//			} else {
+	//				console.log("watch:unsub:ack: Failed");
+	//				// ToDo Error message
+	//				return false;
+	//			}
+	//		});
+	//		addressStore = localStorage.removeItem('address');
+	//	});
 });
 
 //gernerate QR codes with Dash URI
@@ -279,14 +324,6 @@ function submitForm(e) {
 
 		// START SOCKET CODE
 
-		var termId = localStorage.getItem('xPubKeyHashTerm');
-		var server = localStorage.getItem('server');
-		var socket = io.connect(
-			server, {
-				transports: ['websocket']
-			}
-		);
-
 		// Verify amount input
 		if (isNaN(amount)) {
 			// ToDo Warn of error
@@ -306,10 +343,10 @@ function submitForm(e) {
 			Total: 0,
 			Amount: Math.round(amount * 100000000),
 			Address: address,
-			Terminal: termId
+			Terminal: terminal.termId
 		};
 		data = JSON.stringify(wch);
-		socket.emit('watch:add', data, function (res) {
+		terminal.socket.emit('watch:add', data, function (res) {
 			if ("ok" == res) {
 				console.log("watch:add:ack: Passed");
 			} else {

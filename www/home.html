@@ -123,7 +123,7 @@
 			<div class="txInfo"><span id='dashFinal'>-</span> Dash ($<span id='cashFinal'>-</span>)</div>
 			<p class="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
 			<div class='bottomNav'>
-				<button onclick='qrClear(); showhide("#home")' class='mainButton'>cancel</button>
+				<button onclick='qrClear(); showhide("#home"); cancelTX();' class='mainButton cancelTX'>cancel</button>
 			</div>
 		</div>
 	</div>
@@ -139,7 +139,7 @@
 			<br>
 			<p class="confirm" id='confirmText'>Payment Confirmed!</p>
 			<div class='bottomNav'>
-				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home"); cancelTX();' class='mainButton cancelTX'>done</button>
 			</div>
 		</div>
 	</div>
@@ -156,7 +156,7 @@
 			<div class="txInfo"><span id='partialAmount'>-</span> Dash remaining</div>
 			<p class="confirm" >Partial Payment!</p>
 			<div class='bottomNav'>
-				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home"); cancelTX();' class='mainButton'>done</button>
 			</div>
 		</div>
 	</div>
@@ -172,7 +172,7 @@
 			<br>
 			<p class="confirm" >Payment Timeout</p>
 			<div class='bottomNav'>
-				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home"); cancelTX();' class='mainButton cancelTX'>done</button>
 			</div>
 		</div>
 	</div>
