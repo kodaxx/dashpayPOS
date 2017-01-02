@@ -14,6 +14,13 @@ $(document).ready(function () {
 		};
 	}
 
+	function isTrue(element, index, array) {
+		if (element === true) {
+			return true;
+		} else
+			return false;
+	}
+
 	function randHash() {
 		var text = "";
 		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -71,34 +78,64 @@ $(document).ready(function () {
 	socket.on('term:final', function (msg) {
 		console.log("term:final: ", msg);
 		wch = JSON.parse(msg);
+		var payments = [],
+			total = wch["Amount"],
+			list = wch.PaymentLst,
+			instas = [];
 
-		if ($("#qrPartial").hasClass("hidden") && $("#home").hasClass("hidden")) {
-			$("#qr").toggleClass("hidden");
-			$("#qrConfirm").toggleClass("hidden");
-		} else if ($("#home").hasClass("hidden") !== true) {
-			$("#qrConfirm").toggleClass("hidden");
-			$("#home").toggleClass("hidden");
-		} else {
-			$("#qrPartial").toggleClass("hidden");
-			$("#qrConfirm").toggleClass("hidden");
+		for (key in list) {
+			payments.push(key);
 		}
+
+		var first = payments[0];
+
+		if (list[first].Amount >= total && list[first].Insta === true) {
+			$("#confirmText").html('Payment Confirmed');
+		} else
+		if (list[first].Amount >= total && list[first].Insta === false) {
+			$("#confirmText").html('Payment Received<br>(not confirmed)');
+		} else {
+
+			payments.forEach(function (element) {
+				instas.push(list[element].Insta);
+			});
+
+			if (instas.every(isTrue)) {
+				$("#confirmText").html('All Payments Confirmed');
+			} else {
+				console.log("instas: " + instas);
+				var trues = instas.filter(isTrue),
+					truesLen = trues.length;
+
+				console.log("trues: " + trues);
+				$("#confirmText").html(payments.length + ' Payments Received<br>' + truesLen + ' Payments Confirmed');
+			}
+		}
+		showPage('#qrConfirm');
+
 	});
 	//on partial payment
 	socket.on('term:partial', function (msg) {
 		console.log("term:partial ", msg);
 		wch = JSON.parse(msg);
 
-		if ($("#qrPartial").hasClass("hidden") && $("#home").hasClass("hidden")) {
-			$("#qrPartial").toggleClass("hidden");
-			$("#qr").toggleClass("hidden");
-		} else if ($("#home").hasClass("hidden") !== true) {
-			$("#qrPartial").toggleClass("hidden");
-			$("#home").toggleClass("hidden");
-		}
+		showPage('#qrPartial');
 
-		var total = wch["Total"];
-		var needed = wch["Amount"];
-		var left = (needed - total) / 100000000;
+		var total = wch["Total"],
+			needed = wch["Amount"],
+			left = (needed - total) / 100000000,
+			merchant = encodeURIComponent(localStorage.getItem('storeName')),
+			addressStore = localStorage.getItem('address');
+
+		if ($(window).width() > 380) {
+			//generate qr code
+			$("#qrcodePartial").empty();
+			generateQR('#qrcodePartial', 256, addressStore, left, merchant);
+		} else {
+			//generate qr code
+			$("#qrcodePartial").empty();
+			generateQR('#qrcodePartial', 200, addressStore, left, merchant);
+		}
 
 		console.log(total + " " + needed);
 
@@ -107,14 +144,8 @@ $(document).ready(function () {
 	//on timeout
 	socket.on('term:timeout', function (msg) {
 		wch = JSON.parse(msg);
-		
-		if ($("#qrTimeout").hasClass("hidden") && $("#home").hasClass("hidden")) {
-			$("#qrTimeout").toggleClass("hidden");
-			$("#qr").toggleClass("hidden");
-		} else if ($("#home").hasClass("hidden") !== true) {
-			$("#qrTimeout").toggleClass("hidden");
-			$("#home").toggleClass("hidden");
-		}
+
+		showPage('#qrTimeout');
 	});
 });
 
@@ -230,7 +261,7 @@ function submitForm(e) {
 		//get address index, xpub, storeName from local storage
 		var index = parseInt(localStorage.getItem('indexSource'), 10),
 			source_key = localStorage.getItem('xpubKey'),
-			merchant = encodeURI(localStorage.getItem('storeName'));
+			merchant = encodeURIComponent(localStorage.getItem('storeName'));
 
 		Bitcoin.setNetwork('test'); //prod for mainnet and test for testnet //todo
 
@@ -239,6 +270,8 @@ function submitForm(e) {
 
 		var address = generateAddress("receive", index),
 			amount = roundNumber((e.value / price), 8);
+
+		localStorage.setItem('address', address);
 
 		console.log(index + ": " + address);
 		console.log("Dash amount: " + amount);
@@ -271,7 +304,7 @@ function submitForm(e) {
 		var wch = {
 			// FixMe: Swap this out, rounding errors
 			Total: 0,
-			Amount: amount * 100000000,
+			Amount: Math.round(amount * 100000000),
 			Address: address,
 			Terminal: termId
 		};
@@ -307,7 +340,6 @@ function submitForm(e) {
 		$("#dashFinal").text(Math.round(amount * 100) / 100);
 
 		//hide input pad and show qr screen
-		$("#newSale").toggleClass("hidden");
-		$("#qr").toggleClass("hidden");
+		showhide('#qr');
 	}
 }

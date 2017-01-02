@@ -32,14 +32,14 @@
 <body>
 
 	<!-- HOME SCREEN -->
-	<div id="home" class="">
+	<div id="home" class="hideable">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
-			<button onclick='newSale()' class='mainButton'>new sale</button>
+			<button onclick='showhide("#newSale")' class='mainButton'>new sale</button>
 			<br>
-			<button onclick='recentSales()' class='mainButton'>recent sales</button>
+			<button onclick='showhide("#recentSales")' class='mainButton'>recent sales</button>
 			<br>
-			<button onclick='settings()' class='mainButton'>settings</button>
+			<button onclick='showhide("#settings")' class='mainButton'>settings</button>
 			<div class='price'></div>
 			<br>
 			<div id='status' class='notConnected'>not connected</div>
@@ -48,7 +48,7 @@
 	<!-- END HOME -->
 
 	<!-- NEW SALE -->
-	<div id="newSale" class="hidden">
+	<div id="newSale" class="hideable hidden">
 		<div class='mainBox'>
 			<form action='' method='' name='PINform' id='PINform' autocomplete='off'>
 				<div class="InputAddOn">
@@ -73,7 +73,7 @@
 				<input type='button' class='PINbutton PINbuttonNum' name='0' value='0' id='0' onClick=addNumber(this); />
 				<input type='button' class='PINbutton PINbuttonNum' name='00' value='00' id='00' onClick=addNumber(this); />
 				<br>
-				<input type='button' class='PINbutton PINbuttonClear' name='cancel' value='cancel' id='cancel' onClick=goBack(); />
+				<input type='button' class='PINbutton PINbuttonClear' name='cancel' value='cancel' id='cancel' onClick=showhide("#home"); />
 				<input type='button' class='PINbutton PINbuttonClear' name='-' value='clear' id='-' onClick=clearForm(this); />
 				<input type='button' class='PINbutton PINbuttonEnter' name='+' value='enter' id='+' onClick=submitForm(PINbox); />
 			</form>
@@ -82,15 +82,15 @@
 	<!-- END NEW SALE -->
 
 	<!-- RECENT SALES -->
-	<div id="recentSales" class="hidden">
+	<div id="recentSales" class="hideable hidden">
 		<div class='mainBox'>
-			<button onclick='recentSales()' class='mainButton'>back</button>
+			<button onclick='showhide("#home")' class='mainButton'>back</button>
 		</div>
 	</div>
 	<!-- END RECENT SALES -->
 
 	<!-- SETTINGS -->
-	<div id="settings" class="hidden">
+	<div id="settings" class="hideable hidden">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<p class='label'>Public Key:</p>
@@ -106,7 +106,7 @@
 			</div>
 			<div class='bottomNav'>
 				<button onclick='settingsSave()' class='mainButton'>save</button>
-				<button onclick='settingsBack()' class='mainButton'>back</button>
+				<button onclick='showhide("#home")' class='mainButton'>back</button>
 			</div>
 		</div>
 	</div>
@@ -114,7 +114,7 @@
 	
 <!-- QR PAGES -->
 	<!-- QR -->
-	<div id="qr" class="hidden">
+	<div id="qr" class="hideable hidden">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<br>
@@ -123,46 +123,47 @@
 			<div class="txInfo"><span id='dashFinal'>-</span> Dash ($<span id='cashFinal'>-</span>)</div>
 			<p class="confirm" class="waiting">Waiting for payment<span>.</span><span>.</span><span>.</span></p>
 			<div class='bottomNav'>
-				<button onclick='qrCancel()' class='mainButton'>cancel</button>
+				<button onclick='qrClear(); showhide("#home")' class='mainButton'>cancel</button>
 			</div>
 		</div>
 	</div>
 	<!-- END QR -->
 
 	<!-- QR CONFIRM -->
-	<div id="qrConfirm" class="hidden">
+	<div id="qrConfirm" class="hideable hidden">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<br>
 			<img src='img/confirm.png'>
 			<br>
 			<br>
-			<p class="confirm" >Payment Confirmed!</p>
+			<p class="confirm" id='confirmText'>Payment Confirmed!</p>
 			<div class='bottomNav'>
-				<button onclick='qrConfirmDone()' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
 			</div>
 		</div>
 	</div>
 	<!-- END QR CONFIRM -->
 	
 	<!-- QR PARTIAL -->
-	<div id="qrPartial" class="hidden">
+	<div id="qrPartial" class="hideable hidden">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<br>
-			<img src='img/partial.png'>
+<!--			<img src='img/partial.png'>-->
+			<div id="qrcodePartial" class="qrImage"></div>
 			<br>
 			<div class="txInfo"><span id='partialAmount'>-</span> Dash remaining</div>
 			<p class="confirm" >Partial Payment!</p>
 			<div class='bottomNav'>
-				<button onclick='qrPartialDone()' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
 			</div>
 		</div>
 	</div>
 	<!-- END QR PARTIAL -->
 	
 	<!-- QR TIMEOUT -->
-	<div id="qrTimeout" class="hidden">
+	<div id="qrTimeout" class="hideable hidden">
 		<div class='mainBox'>
 			<img class='headerImage' src='img/dashpay.png'>
 			<br>
@@ -171,7 +172,7 @@
 			<br>
 			<p class="confirm" >Payment Timeout</p>
 			<div class='bottomNav'>
-				<button onclick='qrTimeoutDone()' class='mainButton'>done</button>
+				<button onclick='qrClear(); showhide("#home")' class='mainButton'>done</button>
 			</div>
 		</div>
 	</div>

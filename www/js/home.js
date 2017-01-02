@@ -4,6 +4,18 @@ $.ajaxSetup({
     async: false
 });
 //----- HOME PAGE -----
+function showhide(id){
+          $(".hideable").addClass("hidden");
+          $(id).removeClass("hidden")
+}
+
+function showPage(page) {
+	if ($(page).hasClass("hidden") !== true) {
+		return true;
+	}
+	showhide(page);
+}
+
 var price;
 
 $.getJSON("https://api.coinmarketcap.com/v1/ticker/dash/", function (data) {
@@ -13,23 +25,6 @@ $.getJSON("https://api.coinmarketcap.com/v1/ticker/dash/", function (data) {
 
 $("div.price").html("<span>1 dash is currently $</span><span id='dashPrice'>" + price + "</span>");
 
-//onclick show new sale screen and hide home
-function newSale() {
-	$("#home").toggleClass("hidden");
-	$("#newSale").toggleClass("hidden");
-}
-
-//onclick show recent sales screen and hide home
-function recentSales() {
-	$("#home").toggleClass("hidden");
-	$("#recentSales").toggleClass("hidden");
-}
-
-//onclick show settings screen and hide home
-function settings() {
-	$("#home").toggleClass("hidden");
-	$("#settings").toggleClass("hidden");
-}
 //----- END HOME -----
 
 //----- SETTINGS -----
@@ -102,37 +97,9 @@ if (localStorage.getItem('xPubKeyHashTerm')) {
 //----- END SETTINGS -----
 
 //----- QR -----
-//onclick show home, hide qr, clear qr code and sale value
-function qrCancel() {
+//onclick clear qr and value input
+function qrClear() {
 	$("#PINbox").val("");
-
-	$("#home").toggleClass("hidden");
-	$("#qr").toggleClass("hidden");
-
-	$("#qrcode").empty();
-}
-function qrConfirmDone() {
-	$("#PINbox").val("");
-
-	$("#home").toggleClass("hidden");
-	$("#qrConfirm").toggleClass("hidden");
-
-	$("#qrcode").empty();
-}
-function qrPartialDone() {
-	$("#PINbox").val("");
-
-	$("#home").toggleClass("hidden");
-	$("#qrPartial").toggleClass("hidden");
-
-	$("#qrcode").empty();
-}
-function qrTimeoutDone() {
-	$("#PINbox").val("");
-
-	$("#home").toggleClass("hidden");
-	$("#qrTimeout").toggleClass("hidden");
-
 	$("#qrcode").empty();
 }
 //----- END QR -----
