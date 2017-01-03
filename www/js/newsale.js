@@ -3,14 +3,6 @@
 
 //to change from mainnet to testnet change 'test' to 'prod' in this file
 //and change 0x8b to 0x4c in wizard.js
-function randHash() {
-	var text = "";
-	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-	for (var i = 0; i < 32; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-	return text;
-}
 
 var terminal = {}
 terminal.server = localStorage.getItem('server');
@@ -19,13 +11,6 @@ terminal.socket = io.connect(
 		transports: ['websocket']
 	}
 );
-if (localStorage.xPubKeyHashTerm) {
-	terminal.termId = localStorage.xPubKeyHashTerm;
-} else {
-	terminal.termId = randHash();
-	terminal.termId = localStorage.xPubKeyHashTerm;
-}
-
 
 $(document).ready(function () {
 	// First, checks if it isn't implemented yet.
@@ -36,6 +21,21 @@ $(document).ready(function () {
 				return typeof args[number] != 'undefined' ? args[number] : match;
 			});
 		};
+	}
+
+	function randHash() {
+		var text = "";
+		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+		for (var i = 0; i < 32; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return text;
+	}
+	if (localStorage.xPubKeyHashTerm) {
+		terminal.termId = localStorage.getItem('xPubKeyHashTerm');
+	} else {
+		terminal.termId = randHash();
+		localStorage.setItem('xPubKeyHashTerm', terminal.termId);
 	}
 
 	function isTrue(element, index, array) {
